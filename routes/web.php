@@ -35,8 +35,16 @@ require __DIR__.'/auth.php';
  * ==================== NOTES ROUTE ====================
  */
 
- Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/notes', NoteController::class);
+    
+    Route::get('/helloWorldLogin', function(){
+        return "Hello World";
+    });
+});
+
+Route::get('/helloWorld', function(){
+    return "Hello World";
 });
 
 //same as above
