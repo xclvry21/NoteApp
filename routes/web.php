@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,26 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+/**
+ * ==================== NOTES ROUTE ====================
+ */
+
+ Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('/notes', NoteController::class);
+});
+
+//same as above
+// Route::middleware(['auth'])->group(function () {
+//     Route::prefix('notes')->group(function () {
+//         Route::controller(NoteController::class)->group(function () {
+//             Route::get('/', 'index')->name('notes.index');
+//             Route::post('/', 'store')->name('notes.store');
+//             Route::get('/create', 'create')->name('notes.create');
+//             Route::get('/{id}', 'show')->name('notes.show');
+//             Route::put('/{id}', 'update')->name('notes.update');
+//             Route::delete('/{id}', 'destroy')->name('notes.destroy');
+//             Route::get('/{id}/edit', 'edit')->name('notes.edit');
+//         });
+//     });
+// });
