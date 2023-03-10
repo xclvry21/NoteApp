@@ -36,6 +36,7 @@ require __DIR__.'/auth.php';
  */
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/notes/dashboard', [NoteController::class, 'dashboard'])->name('notes.dashboard');
     Route::resource('/notes', NoteController::class);
     
     Route::get('/helloWorldLogin', function(){

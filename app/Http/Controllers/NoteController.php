@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class NoteController extends Controller
 {
     /**
+     * dashboard
+     */
+    public function dashboard()
+    {
+        return view('user.index', [
+            'title' => "Dashboard"
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
