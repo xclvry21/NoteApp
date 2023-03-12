@@ -29,9 +29,6 @@
         {{-- toastr --}}
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
-        {{-- summernote --}}
-        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-        
     </head>
 
     <body data-topbar="dark">
@@ -120,7 +117,8 @@
             break;
 
             case 'success':
-            toastr.success(" {{ Session::get('message') }} ");
+            toastr.success(" {{ Session::get('message') }} ");\
+            alert("HAHAHA");
             break;
 
             case 'warning':
@@ -134,25 +132,6 @@
         @endif 
         </script>
 
-        {{-- summernote --}}
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#summernote').summernote({
-                    placeholder: 'Hello, welcome to NoteApp',
-                    tabsize: 2,
-                    height: 300,
-                    toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', 'fontname', 'fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['hr']],
-                    ['table', ['table']],
-                    ],
-                });
-            });
-        </script>
 
         <script>
             $(document).ready(function() {

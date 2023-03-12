@@ -28,7 +28,7 @@ class NoteController extends Controller
         $notes = Note::where([
             'user_id' => Auth::user()->id
         ])->latest()->get();
-        
+
         //dd($notes);
         return view('user.note.index', [
             'title' => "All Notes",
@@ -41,7 +41,9 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.note.create', [
+            'title' => "Create Note"
+        ]);
     }
 
     /**
@@ -49,7 +51,33 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        $note = new Note();
+        $note->title = $request->title;
+        $note->body = $request->body;
+        $note->user_id = Auth::user()->id;
+        $note->created_at = date('Y-m-d H:i:s');
+        $note->save();
+
+        return redirect()->back()->with('success', "Note added successfully");
+
+        // if (!empty($data['title'])) {
+
+        //     $data['body'] = encrypt($request->body);
+        //     $data['user_id'] = Auth::user()->id;
+
+        //     $this->noteModel->note_store($data);
+
+        //     return redirect()->back()->with('success', "Note added successfully");
+        // } else {
+        //     return redirect()->back()->with('error', "Title field must not be empty")->withInput();
+        // }
+
     }
 
     /**

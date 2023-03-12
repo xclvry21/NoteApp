@@ -23,7 +23,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('notes.index')}}">All</a></li>
-                        <li><a href="#">Create</a></li>                        
+                        <li><a href="{{route('notes.create')}}">Create</a></li>                        
                     </ul>
                 </li>
             </ul>
