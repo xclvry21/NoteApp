@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,7 +86,17 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        //
+        $note = Note::find($note->id);
+
+        if($note->user_id != Auth::user()->id){
+            abort(401);
+        }else{
+            $note['date'] = $note->updated_at != null ? $note->updated_at: $note->created_at;
+            $note['date'] = Carbon::createFromFormat('Y-m-d H:i:s', $note['date'])->diffForHumans();
+            return response()->json($note);
+        }
+        
+        
     }
 
     /**

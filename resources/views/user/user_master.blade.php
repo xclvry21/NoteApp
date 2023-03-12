@@ -139,6 +139,27 @@
             });
         </script>
 
+
+        {{-- note modal --}}
+        <script type='text/javascript'>
+            $(document).ready(function () {
+                $('body').on('click', '#show-note', function () {
+                var noteURL = $(this).data('url');
+                var base_url = window.location.origin;
+                $('#noteShowModal').modal('show');
+                    $.get(noteURL, function (data) {
+                        console.log(data);
+                        $('#noteShowModal').modal('show');
+                    
+                        $('#note_title').text(data.title);
+                        $('#note_body').text(data.body);
+                        $('#note_date').text(data.date);
+                    
+                    })
+                });    
+            });
+        </script>
+
     </body>
 
 </html>
