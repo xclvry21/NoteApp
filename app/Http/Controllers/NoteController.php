@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -19,10 +20,20 @@ class NoteController extends Controller
 
     /**
      * Display a listing of the resource.
+     * 
+     * The latest and oldest methods allow you to easily order results by date.
      */
     public function index()
     {
-        //
+        $notes = Note::where([
+            'user_id' => Auth::user()->id
+        ])->latest()->get();
+        
+        //dd($notes);
+        return view('user.note.index', [
+            'title' => "All Notes",
+            'notes' => $notes
+        ]);
     }
 
     /**
