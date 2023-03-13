@@ -118,7 +118,6 @@
 
             case 'success':
             toastr.success(" {{ Session::get('message') }} ");\
-            alert("HAHAHA");
             break;
 
             case 'warning':
@@ -148,7 +147,6 @@
                 var base_url = window.location.origin;
                 $('#noteShowModal').modal('show');
                     $.get(noteURL, function (data) {
-                        console.log(data);
                         $('#noteShowModal').modal('show');
                     
                         $('#note_title').text(data.title);
