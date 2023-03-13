@@ -15,7 +15,8 @@ class NoteController extends Controller
     public function dashboard()
     {
         return view('user.index', [
-            'title' => "Dashboard"
+            'title' => "Dashboard",
+            'note_count' => Note::get()->count()
         ]);
     }
 

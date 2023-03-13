@@ -22,7 +22,7 @@
                     <div class="d-flex">
                         <div class="flex-grow-1">
                             <p class="text-truncate font-size-14 mb-2">Total Notes</p>
-                            <h4 class="mb-2">21</h4>
+                            <h4 class="mb-2">{{$note_count}}</h4>
                         </div>
                         <div class="avatar-sm">
                             <span class="avatar-title bg-light text-primary rounded-3">
@@ -30,7 +30,7 @@
                             </span>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-primary btn-sm waves-effect waves-light">More info<i class="ri-arrow-right-line align-middle ms-2"></i></a>                                           
+                    <a href="{{route('notes.index')}}" class="btn btn-primary btn-sm waves-effect waves-light">More info<i class="ri-arrow-right-line align-middle ms-2"></i></a>                                           
                 </div><!-- end cardbody -->
             </div><!-- end col -->
 
