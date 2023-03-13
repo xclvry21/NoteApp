@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 /**
  * ==================== NOTES ROUTE ====================
@@ -38,13 +38,14 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/notes/dashboard', [NoteController::class, 'dashboard'])->name('notes.dashboard');
     Route::resource('/notes', NoteController::class);
-    
-    Route::get('/helloWorldLogin', function(){
+    Route::get('/notes/delete/{note}', [NoteController::class, 'destroy'])->name('notes.delete');
+
+    Route::get('/helloWorldLogin', function () {
         return "Hello World";
     });
 });
 
-Route::get('/helloWorld', function(){
+Route::get('/helloWorld', function () {
     return "Hello World";
 });
 
