@@ -34,7 +34,18 @@
                     <!-- item-->
                     <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i> Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                    <!-- logout -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-responsive-nav-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            <button type="submit" class="dropdown-item text-danger">
+                                <i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout
+                            </button>
+                        </x-responsive-nav-link>
+                    </form>
                 </div>
             </div>
 
