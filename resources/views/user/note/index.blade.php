@@ -31,7 +31,7 @@
                                         <td>
                                             <a href="javascript:void(0)" id="show-note" data-url="{{ route('notes.show', $note->id) }}" class="btn btn-info sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="fas fa-eye" ></i></a>
         
-                                            <a href="#" id="edit" class="btn btn-primary sm waves-effect waves-light"><i class="far fa-edit" ></i></a>
+                                            <a href="{{route('notes.edit', $note)}}" id="edit" class="btn btn-primary sm waves-effect waves-light"><i class="far fa-edit" ></i></a>
         
                                             <a href="#" class="btn btn-danger sm" title="Delete" id="delete"> <i class="fas fa-trash" ></i></a>
                                         </td>

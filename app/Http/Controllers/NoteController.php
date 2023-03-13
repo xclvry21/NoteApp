@@ -88,15 +88,13 @@ class NoteController extends Controller
     {
         $note = Note::find($note->id);
 
-        if($note->user_id != Auth::user()->id){
+        if ($note->user_id != Auth::user()->id) {
             abort(401);
-        }else{
-            $note['date'] = $note->updated_at != null ? $note->updated_at: $note->created_at;
+        } else {
+            $note['date'] = $note->updated_at != null ? $note->updated_at : $note->created_at;
             $note['date'] = Carbon::createFromFormat('Y-m-d H:i:s', $note['date'])->diffForHumans();
             return response()->json($note);
         }
-        
-        
     }
 
     /**
@@ -104,7 +102,15 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        //
+        //dd("edit" . $note->id);
+        if ($note->user_id != Auth::user()->id) {
+            abort(401);
+        } else {
+            return view('user.note.edit', [
+                'title' => "Edit Note",
+                'note' => $note
+            ]);
+        }
     }
 
     /**
@@ -112,7 +118,20 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //
+        //dd($request->except(['_token', '_method']));
+        //dd($note->id);
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        Note::where('id', $note->id)->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        return redirect()->back()->with('success', "Note updated successfully");
     }
 
     /**
