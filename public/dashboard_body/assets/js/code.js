@@ -26,7 +26,7 @@ $(function() {
 });
 
 
-$('.delete-user').click(function(e) {
+$('.delete-note').click(function(e) {
     e.preventDefault() // Don't post the form, unless confirmed
     if (confirm('Are you sure?')) {
         // Post the form

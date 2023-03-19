@@ -37,13 +37,13 @@
                                             <a href="{{route('notes.delete', $note)}}" class="btn btn-danger sm" title="Delete" id="delete"><i class="fas fa-trash" ></i></a>
 
                                             {{-- this form will use the delete request route:resource --}}
-                                            {{-- <form method="POST" action="{{route('notes.destroy', $note)}}">
+                                            <form method="POST" action="{{route('notes.destroy', $note)}}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <div class="form-group">
-                                                    <input type="submit" class="btn btn-danger btn-sm delete-user" value="Delete"></i>
+                                                    <input type="submit" class="btn btn-danger btn-sm delete-note" value="Delete"></i>
                                                 </div>
-                                            </form> --}}
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
