@@ -4,10 +4,9 @@ $(function() {
         e.preventDefault();
         var link = $(this).attr("href");
 
-
         Swal.fire({
             title: 'Are you sure?',
-            text: "Delete This Data?",
+            text: "This data will be deleted permanently!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -18,24 +17,19 @@ $(function() {
                 window.location.href = link
                 Swal.fire(
                     'Deleted!',
-                    'Your file has been deleted.',
+                    'Data has been deleted.',
                     'success'
                 )
             }
         })
     });
+});
 
-    // customized swals
-    $(document).on('click', '#swal-restore', function(e) {
-        e.preventDefault();
-        var link = $(this).attr("href");
 
-        window.location.href = link
-        Swal.fire(
-            'Success',
-            'Note restored successfully',
-            'success'
-        )
-    });
-
+$('.delete-note').click(function(e) {
+    e.preventDefault() // Don't post the form, unless confirmed
+    if (confirm('Are you sure?')) {
+        // Post the form
+        $(e.target).closest('form').submit() // Post the surrounding form
+    }
 });
