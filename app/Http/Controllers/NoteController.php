@@ -9,21 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
-    /**
-     * dashboard
-     */
+
     public function dashboard()
     {
         return view('user.index', [
             'title' => "Dashboard",
-            'note_count' => Note::get()->count()
+            'note_count' => Note::where([
+                'user_id' => Auth::user()->id
+            ])->get()->count()
         ]);
     }
 
     /**
      * Display a listing of the resource.
-     * 
-     * The latest and oldest methods allow you to easily order results by date.
      */
     public function index()
     {
@@ -67,19 +65,6 @@ class NoteController extends Controller
         $note->save();
 
         return redirect()->back()->with('success', "Note added successfully");
-
-        // if (!empty($data['title'])) {
-
-        //     $data['body'] = encrypt($request->body);
-        //     $data['user_id'] = Auth::user()->id;
-
-        //     $this->noteModel->note_store($data);
-
-        //     return redirect()->back()->with('success', "Note added successfully");
-        // } else {
-        //     return redirect()->back()->with('error', "Title field must not be empty")->withInput();
-        // }
-
     }
 
     /**
@@ -103,7 +88,6 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        //dd("edit" . $note->id);
         if ($note->user_id != Auth::user()->id) {
             abort(401);
         } else {
@@ -119,20 +103,22 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //dd($request->except(['_token', '_method']));
-        //dd($note->id);
         $request->validate([
             'title' => 'required',
             'body' => 'required'
         ]);
 
-        Note::where('id', $note->id)->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);
+        if ($note->user_id != Auth::user()->id) {
+            abort(401);
+        } else {
+            Note::where('id', $note->id)->update([
+                'title' => $request->title,
+                'body' => $request->body,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
 
-        return redirect()->back()->with('success', "Note updated successfully");
+            return redirect()->back()->with('success', "Note updated successfully");
+        }
     }
 
     /**
