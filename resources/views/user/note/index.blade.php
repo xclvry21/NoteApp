@@ -38,7 +38,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <div class="form-group">
-                                                <input type="submit" class="btn btn-danger btn-sm delete-user" value="Delete"></i>
+                                                <input type="submit" class="btn btn-danger btn-sm delete-note" value="Delete"></i>
                                             </div>
                                         </form> --}}
                                     </td>
