@@ -14,7 +14,7 @@
                             @csrf
                             <div class="row mb-3 mt-3">
                                 <div class="col-sm-12">
-                                    <input class="form-control" type="text" placeholder="Note title" id="example-text-input" name="title" value="{{ old('title') }}">
+                                    <input class="form-control" type="text" placeholder="Note title" name="title" value="{{ old('title') }}">
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

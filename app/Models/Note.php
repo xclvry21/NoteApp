@@ -9,8 +9,13 @@ class Note extends Model
 {
     use HasFactory;
 
+    /**
+     *  It takes care of defining which fields are to be considered when the user will 
+     * insert or update data. Only the fields marked as fillable are used in the mass 
+     * assignment.
+     */
     protected $fillable = [
-        'user_id', 'title', 'body', 'created_at', 'updated_at'
+        'user_id', 'title', 'body'
     ];
 
 
@@ -19,14 +24,14 @@ class Note extends Model
      * to exist on your model's corresponding database table.
      * 
      */
-    //(1) - By default this is true
-    public $timestamps = false;
-
-    //(2)
-    /* protected static function booted(): void
+    protected static function booted(): void
     {
         static::creating(function (self $model) {
             $model->updated_at = null;
         });
-    } */
+
+        static::updating(function (self $model) {
+            $model->updated_at = now()->toTimeString();
+        });
+    }
 }

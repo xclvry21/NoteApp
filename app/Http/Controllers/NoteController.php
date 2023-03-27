@@ -9,14 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
-
     public function dashboard()
     {
+        $note_count = Note::where('user_id', Auth::user()->id)->get()->count();
+
         return view('user.index', [
             'title' => "Dashboard",
-            'note_count' => Note::where([
-                'user_id' => Auth::user()->id
-            ])->get()->count()
+            'note_count' => $note_count
         ]);
     }
 
@@ -25,9 +24,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::where([
-            'user_id' => Auth::user()->id
-        ])->latest()->get();
+        $notes = Note::where('user_id', Auth::user()->id)->latest()->get();
 
         //dd($notes);
         return view('user.note.index', [
@@ -57,12 +54,18 @@ class NoteController extends Controller
             'body' => 'required'
         ]);
 
+        //eloquent ORM for saving data
         $note = new Note();
+        $note->user_id = Auth::user()->id;
         $note->title = $request->title;
         $note->body = $request->body;
-        $note->user_id = Auth::user()->id;
-        $note->created_at = date('Y-m-d H:i:s');
         $note->save();
+
+        /**
+         * equivalent to:
+         * INSERT INTO notes (user_id, title, body)
+         * VALUES (1, titleVal, bodyVal);
+         */
 
         return redirect()->back()->with('success', "Note added successfully");
     }
@@ -72,7 +75,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        $note = Note::find($note->id);
+        $note = Note::findOrFail($note->id);
 
         if ($note->user_id != Auth::user()->id) {
             abort(401);
@@ -88,12 +91,14 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
+        $current_note = Note::findOrFail($note->id);
+
         if ($note->user_id != Auth::user()->id) {
             abort(401);
         } else {
             return view('user.note.edit', [
                 'title' => "Edit Note",
-                'note' => $note
+                'note' => $current_note
             ]);
         }
     }
@@ -114,7 +119,6 @@ class NoteController extends Controller
             Note::where('id', $note->id)->update([
                 'title' => $request->title,
                 'body' => $request->body,
-                'updated_at' => date('Y-m-d H:i:s')
             ]);
 
             return redirect()->back()->with('success', "Note updated successfully");

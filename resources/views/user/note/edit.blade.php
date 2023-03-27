@@ -15,7 +15,7 @@
                             @method('PUT')
                             <div class="row mb-3 mt-3">
                                 <div class="col-sm-12">
-                                    <input class="form-control" type="text" placeholder="Note title" id="example-text-input" name="title" value="{{$note->title}}">
+                                    <input class="form-control" type="text" placeholder="Note title" name="title" value="{{$note->title}}">
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
