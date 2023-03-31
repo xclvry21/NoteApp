@@ -20,7 +20,6 @@ class NoteFactory extends Factory
             'user_id' => 1, //1st user
             'title' => fake()->sentence(5),
             'body' => fake()->paragraph(4),
-            'created_at' => date('Y-m-d H:i:s') //current date and time
         ];
     }
 }
