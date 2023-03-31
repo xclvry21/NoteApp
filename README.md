@@ -21,7 +21,11 @@ If you wish to work without CRUD functionalities of notes, you may run `git chec
 
 ## Add-ons
 
--   **[Clockwork](https://github.com/itsgoingd/clockwork)**
 -   **[Toastr](https://github.com/yoeunes/toastr)**
+
+## Tutorials
+
+-   **[Create your first laravel project](https://drive.google.com/file/d/14W8CJAPmNcWq6UQeBoUWpBVSTjc2PXKF/view?usp=share_link)**
+-   **[Install Laravel Breeze package](https://drive.google.com/file/d/1624UK4lEX6NVVbJplfxY2cfDDeF0J_jU/view?usp=share_link)**
 
 :pushpin:_this project is for demonstration purpose for the subject: Current Trends in IT and Seminar_
